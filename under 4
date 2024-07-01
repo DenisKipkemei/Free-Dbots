@@ -1,0 +1,173 @@
+<xml xmlns="http://www.w3.org/1999/xhtml" is_dbot="true" collection="false">
+  <variables>
+    <variable type="" id="last_digit_1" islocal="false" iscloud="false">Last Digit 1</variable>
+    <variable type="" id="last_digit_2" islocal="false" iscloud="false">Last Digit 2</variable>
+    <variable type="" id="stake" islocal="false" iscloud="false">Stake</variable>
+    <variable type="" id="loss" islocal="false" iscloud="false">Loss</variable>
+    <variable type="" id="target_profit" islocal="false" iscloud="false">Target Profit</variable>
+    <variable type="" id="stake_2" islocal="false" iscloud="false">Stake 2</variable>
+  </variables>
+  <block type="trade_definition" id="=l`M:iIyHzz`#=5#|XK6" x="0" y="0">
+    <statement name="TRADE_OPTIONS">
+      <block type="trade_definition_market" id="gIVdlFG%DasAatr9N7WZ" deletable="false" movable="false">
+        <field name="MARKET_LIST">synthetic_index</field>
+        <field name="SUBMARKET_LIST">random_index</field>
+        <field name="SYMBOL_LIST">R_100</field>
+        <next>
+          <block type="trade_definition_tradetype" id="cB2Gi-p|bT3-yd442,c{" deletable="false" movable="false">
+            <field name="TRADETYPECAT_LIST">digits</field>
+            <field name="TRADETYPE_LIST">overunder</field>
+            <next>
+              <block type="trade_definition_contracttype" id="Tyr;d8+6aiA0]6=|^+)K" deletable="false" movable="false">
+                <field name="TYPE_LIST">both</field>
+                <next>
+                  <block type="trade_definition_candleinterval" id="-MbIlV6Mw#TR^XoJZRM+" deletable="false" movable="false">
+                    <field name="CANDLEINTERVAL_LIST">60</field>
+                    <next>
+                      <block type="trade_definition_restartbuysell" id="`;!:ygyOsiO4Cfi*l^J~" deletable="false" movable="false">
+                        <field name="TIME_MACHINE_ENABLED">FALSE</field>
+                        <next>
+                          <block type="trade_definition_restartonerror" id="78Hsv?gP|8V-IbuF@Ii#" deletable="false" movable="false">
+                            <field name="RESTARTONERROR">TRUE</field>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="INITIALIZATION">
+      <block type="variables_set" id="init_loss" inline="true">
+        <field name="VAR" id="loss" variabletype="">Loss</field>
+        <value name="VALUE">
+          <block type="math_number" id="loss_value">
+            <field name="NUM">1000</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="init_target_profit" inline="true">
+            <field name="VAR" id="target_profit" variabletype="">Target Profit</field>
+            <value name="VALUE">
+              <block type="math_number" id="target_profit_value">
+                <field name="NUM">607</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="init_stake" inline="true">
+                <field name="VAR" id="stake" variabletype="">Stake</field>
+                <value name="VALUE">
+                  <block type="math_number" id="stake_value">
+                    <field name="NUM">2</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="init_stake_2" inline="true">
+                    <field name="VAR" id="stake_2" variabletype="">Stake 2</field>
+                    <value name="VALUE">
+                      <block type="math_number" id="stake_2_value">
+                        <field name="NUM">2</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="init_last_digit_1" inline="true">
+                        <field name="VAR" id="last_digit_1" variabletype="">Last Digit 1</field>
+                        <value name="VALUE">
+                          <block type="math_number" id="last_digit_1_value">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="variables_set" id="init_last_digit_2" inline="true">
+                            <field name="VAR" id="last_digit_2" variabletype="">Last Digit 2</field>
+                            <value name="VALUE">
+                              <block type="math_number" id="last_digit_2_value">
+                                <field name="NUM">0</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="DURING_PURCHASE">
+      <block type="trade_definition" id="during_purchase_block" deletable="false" movable="false">
+        <statement name="INITIALIZATION">
+          <block type="variables_set" id="set_last_digit_2" inline="true">
+            <field name="VAR" id="last_digit_2" variabletype="">Last Digit 2</field>
+            <value name="VALUE">
+              <block type="math_number" id="last_digit_2_value_update">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="set_last_digit_1" inline="true">
+                <field name="VAR" id="last_digit_1" variabletype="">Last Digit 1</field>
+                <value name="VALUE">
+                  <block type="variables_get" id="get_last_digit_2">
+                    <field name="VAR" id="last_digit_2" variabletype="">Last Digit 2</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+    <statement name="AFTER_PURCHASE">
+      <block type="controls_if" id="if_block" inline="true">
+        <value name="IF0">
+          <block type="logic_compare" id="logic_compare_block" inline="true">
+            <field name="OP">GT</field>
+            <value name="A">
+              <block type="variables_get" id="get_last_digit_1_for_compare">
+                <field name="VAR" id="last_digit_1" variabletype="">Last Digit 1</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="math_number" id="compare_value">
+                <field name="NUM">5</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="controls_if" id="nested_if_block" inline="true">
+            <value name="IF0">
+              <block type="logic_compare" id="nested_logic_compare_block" inline="true">
+                <field name="OP">GT</field>
+                <value name="A">
+                  <block type="variables_get" id="get_last_digit_2_for_compare">
+                    <field name="VAR" id="last_digit_2" variabletype="">Last Digit 2</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="nested_compare_value">
+                    <field name="NUM">5</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="trade_definition_tradeoptions" id="trade_under_5" inline="true">
+                <mutation has_first_barrier="false" has_second_barrier="false" has_prediction="true"></mutation>
+                <field name="DURATIONTYPE_LIST">t</field>
+                <value name="DURATION">
+                  <block type="math_number" id="duration_value">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <value name="AMOUNT">
+                  <block type="variables_get" id="stake_for_trade">
+                    <field
